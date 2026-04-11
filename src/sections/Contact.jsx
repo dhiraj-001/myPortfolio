@@ -118,7 +118,7 @@ const Contact = () => {
           </p>
           
           <a
-            href="https://github.com/dhiraj-001/YOUR_REPO_NAME" // Make sure to replace YOUR_REPO_NAME with the actual repo name
+            href="https://github.com/dhiraj-001/myPortfolio" // Make sure to replace YOUR_REPO_NAME with the actual repo name
             target="_blank"
             rel="noreferrer"
             className="group flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.2rem] text-white/30 transition-colors hover:text-white"
