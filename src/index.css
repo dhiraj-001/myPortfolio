@@ -1,0 +1,203 @@
+@import "tailwindcss";
+
+/* Amiamie Regular */
+@font-face {
+  font-family: "Amiamie";
+  src: url("/fonts/amiamie/otf/Amiamie-Regular.otf") format("opentype"),
+    url("/fonts/amiamie/ttf/Amiamie-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Amiamie Regular Italic */
+@font-face {
+  font-family: "Amiamie";
+  src: url("/fonts/amiamie/otf/Amiamie-Italic.otf") format("opentype"),
+    url("/fonts/amiamie/ttf/Amiamie-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Amiamie Light */
+@font-face {
+  font-family: "Amiamie";
+  src: url("/fonts/amiamie/otf/Amiamie-Light.otf") format("opentype"),
+    url("/fonts/amiamie/ttf/Amiamie-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Amiamie Light Italic */
+@font-face {
+  font-family: "Amiamie";
+  src: url("/fonts/amiamie/otf/Amiamie-LightItalic.otf") format("opentype"),
+    url("/fonts/amiamie/ttf/Amiamie-LightItalic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Amiamie Black */
+@font-face {
+  font-family: "Amiamie";
+  src: url("/fonts/amiamie/otf/Amiamie-Black.otf") format("opentype"),
+    url("/fonts/amiamie/ttf/Amiamie-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Amiamie Black Italic */
+@font-face {
+  font-family: "Amiamie";
+  src: url("/fonts/amiamie/otf/Amiamie-BlackItalic.otf") format("opentype"),
+    url("/fonts/amiamie/ttf/Amiamie-BlackItalic.ttf") format("truetype");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Amiamie-Round Variants (if needed separately) */
+@font-face {
+  font-family: "Amiamie-Round";
+  src: url("/fonts/amiamie/otf/Amiamie-RegularRound.otf") format("opentype"),
+    url("/fonts/amiamie/ttf/Amiamie-RegularRound.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Amiamie-Round";
+  src: url("/fonts/amiamie/otf/Amiamie-BlackRound.otf") format("opentype"),
+    url("/fonts/amiamie/ttf/Amiamie-BlackRound.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Amiamie-Round";
+  src: url("/fonts/amiamie/otf/Amiamie-BlackItalicRound.otf") format("opentype"),
+    url("/fonts/amiamie/ttf/Amiamie-BlackItalicRound.ttf") format("truetype");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+@theme {
+  --color-primary: #e5e5e0;
+  --color-DarkLava: #393632;
+  --color-SageGray: #8b8b73;
+  --color-gold: #cfa355;
+  --font-amiamie: "Amiamie", sans-serif;
+  --font-amiamie-round: "Amiamie-Round", sans-serif;
+
+  --animate-marquee: marquee 40s infinite linear;
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+}
+
+body {
+  background: #e5e5e0;
+  color: black;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  font-family: var(--font-amiamie);
+}
+
+/* Fix vertical alignment of marquee symbols */
+.marquee-text-responsive svg {
+  vertical-align: text-top !important;
+  display: inline-block !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Adjust symbol alignment for larger screens */
+@media (min-width: 1280px) {
+  .marquee-text-responsive svg {
+    transform: translateY(-4px) !important;
+  }
+}
+
+/* Extra small screens below 350px */
+@media (max-width: 349px) {
+  .banner-text-responsive {
+    font-size: 32px !important;
+    line-height: 1.3 !important;
+  }
+  
+  .marquee-text-responsive {
+    font-size: 14px !important;
+  }
+  
+  .contact-text-responsive {
+    font-size: 20px !important;
+  }
+  
+  .value-text-responsive {
+    font-size: 22px !important;
+  }
+  
+  /* Ultra-compact padding for very small screens */
+  .px-responsive {
+    padding-left: 0.25rem !important;
+    padding-right: 0.25rem !important;
+  }
+  
+  .gap-responsive {
+    gap: 0.25rem !important;
+  }
+  
+  /* Ensure marquee symbols stay organized under 350px */
+  .ultra-small-screen span {
+    padding-left: 0.25rem !important;
+    padding-right: 0.25rem !important;
+  }
+  
+  /* Keep marquee text readable on very small screens */
+  .ultra-small-screen .marquee-text-responsive {
+    font-size: 12px !important;
+    white-space: nowrap !important;
+  }
+}
+
+/* Keep John Doe Smith together - never break between names */
+.banner-text-responsive {
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .banner-text-responsive {
+    white-space: normal;
+  }
+}
+
+@utility clip-path {
+  clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+}
+
+@utility banner-text-responsive {
+  @apply text-[36px] sm:text-[48px] md:text-[68px] lg:text-[118px] xl:text-[126px] 2xl:text-[152px] leading-6 sm:leading-7 md:leading-10 lg:leading-18 xl:leading-22;
+}
+
+@utility value-text-responsive {
+  @apply text-2xl md:text-[26px] lg:text-[32px];
+}
+
+@utility marquee-text-responsive {
+  @apply text-[14px] sm:text-[18px] md:text-[28px] lg:text-[36px] xl:text-[42px];
+}
+
+@utility contact-text-responsive {
+  @apply text-[28px] sm:text-[36px] md:text-[42px] lg:text-[52px] xl:text-[62px] 2xl:text-[100px];
+}
+
