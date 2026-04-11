@@ -111,6 +111,8 @@ body {
   color: black;
   scroll-behavior: smooth;
   overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
   font-family: var(--font-amiamie);
 }
 

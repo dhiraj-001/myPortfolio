@@ -26,8 +26,8 @@ const App = () => {
   }, [progress]);
 
   return (
-    <ReactLenis root className="relative w-screen min-h-screen overflow-x-hidden bg-[#050505]">
-      
+    <ReactLenis root className="relative w-full min-h-screen overflow-x-hidden bg-[#050505]">
+      <main className="relative w-full max-w-[100vw] min-h-[100dvh] overflow-x-clip">
       {/* Premium Pre-loader */}
       <div
         className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#050505] transition-all duration-1000 ease-[cubic-bezier(0.76,0,0.24,1)] ${
@@ -58,14 +58,14 @@ const App = () => {
           </p>
         </div>
       </div>
-
+<Navbar />
       {/* Main Content Reveal */}
       <div
         className={`transition-all duration-1000 delay-300 ${
           isLoaded ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
         }`}
       >
-        <Navbar />
+        
         <Hero />
         <Services />
         <Skills />
@@ -73,6 +73,7 @@ const App = () => {
         <About />
         <Contact />
       </div>
+      </main>
     </ReactLenis>
   );
 };

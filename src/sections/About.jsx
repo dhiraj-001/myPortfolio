@@ -47,11 +47,11 @@ const About = () => {
     gsap.to(imgRef.current, {
       clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
       scale: 1,
-      duration: 1.4,
+      duration: .4,
       ease: "power4.out",
       scrollTrigger: {
         trigger: imgWrapRef.current,
-        start: "top 85%",
+        start: "top 65%",
         once: true,
       },
     });
