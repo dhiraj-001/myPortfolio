@@ -34,7 +34,7 @@ export const AnimatedTextLines = ({ text, className }) => {
           key={index}
           ref={(el) => (lineRefs.current[index] = el)}
           // Added responsive text sizing here (text-sm for mobile -> text-lg for desktop)
-          className="block text-[20px] sm:text-base md:text-lg leading-relaxed tracking-wide text-pretty"
+          className="block text-[20px] sm:text-lg md:text-3xl leading-relaxed tracking-wide text-pretty"
         >
           {line}
         </span>

@@ -8,7 +8,7 @@ import { Suspense } from "react"; // 👈 Import Suspense
 const Hero = () => {
   const isMobile = useMediaQuery({ maxWidth: 853 });
 
-  const text = `I build intelligent ML systems and scalable web applications focused on real-world impact, from anomaly detection and fraud analysis to production-ready full-stack products.`;
+  const text = `Building production-ready web applications and intelligent ML systems to solve real-world problems.`;
 
   return (
     <section
