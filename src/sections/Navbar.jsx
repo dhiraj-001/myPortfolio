@@ -4,9 +4,9 @@ import gsap from "gsap";
 import { Link } from "react-scroll";
 
 const socials = [
-  { name: "LinkedIn", href: "https://linkedin.com" },
-  { name: "GitHub", href: "https://github.com/dhiraj-001" },
-  { name: "Twitter", href: "https://twitter.com" },
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/dhiraj-gogoi-330008274/" },
+  { name: "GitHub", href: "https://github.com/dhiraj-001/" },
+  { name: "Twitter", href: "https://x.com/DhirajG01" },
 ];
 
 const Navbar = () => {

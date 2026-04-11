@@ -137,7 +137,7 @@ const Works = () => {
 
   return (
     <section
-      id="work"
+      id="works"
       ref={sectionRef}
       className="flex min-h-screen flex-col bg-[#F9F9F9]"
     >
