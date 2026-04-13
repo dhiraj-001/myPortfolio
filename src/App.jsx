@@ -10,6 +10,8 @@ import Works from "./sections/Works";
 import Contact from "./sections/Contact";
 import { useProgress } from "@react-three/drei";
 import Skills from "./sections/Skills";
+import Projects from "./pages/Projects";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const App = () => {
   const { progress } = useProgress();
@@ -58,21 +60,29 @@ const App = () => {
           </p>
         </div>
       </div>
-<Navbar />
-      {/* Main Content Reveal */}
-      <div
-        className={`transition-all duration-1000 delay-300 ${
-          isLoaded ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-        }`}
-      >
-        
-        <Hero />
-        <Services />
-        <Skills />
-        <Works />
-        <About />
-        <Contact />
-      </div>
+      <Router>
+        <Navbar />
+        {/* Main Content Reveal */}
+        <div
+          className={`transition-all duration-1000 delay-300 ${
+            isLoaded ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+          }`}
+        >
+          <Routes>
+            <Route path="/" element={
+              <>
+                <Hero />
+                <Services />
+                <Skills />
+                <Works />
+                <About />
+                <Contact />
+              </>
+            } />
+            <Route path="/projects" element={<Projects />} />
+          </Routes>
+        </div>
+      </Router>
       </main>
     </ReactLenis>
   );

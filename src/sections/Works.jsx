@@ -5,6 +5,7 @@ import { useMemo, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Link } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,18 +16,24 @@ const Works = () => {
 
   const text = `Projects across machine learning, backend systems, and full stack development, built to solve practical real-world problems.`;
 
-  const groupedProjects = useMemo(() => {
+const groupedProjects = useMemo(() => {
     return projects.reduce((acc, project) => {
       if (!acc[project.domain]) acc[project.domain] = [];
-      acc[project.domain].push(project);
+      
+      // Only push the project if the domain array has fewer than 2 items
+      if (acc[project.domain].length < 2) {
+        acc[project.domain].push(project);
+      }
+      
       return acc;
     }, {});
-  }, []);
+  }, []); // Note: No need to pass 'projects' into dependency array if it's imported as a constant
 
   const flatProjects = useMemo(() => {
     return Object.values(groupedProjects).flat();
   }, [groupedProjects]);
 
+  
   useGSAP(
     () => {
       gsap.from(".domain-header", {
@@ -281,6 +288,17 @@ const Works = () => {
               </div>
             </div>
           ))}
+        </div>
+        
+        {/* Separate Projects Page Link */}
+        <div className="mt-24 flex justify-center">
+          <Link 
+            to="/projects" 
+            className="group flex items-center gap-3 rounded-full border border-black/20 px-8 py-4 text-xs font-bold uppercase tracking-widest text-black transition-all duration-500 hover:border-black hover:bg-black hover:text-white md:text-sm"
+          >
+            View All Projects
+            <Icon icon="lucide:arrow-right" className="text-lg transition-transform duration-500 group-hover:translate-x-1" />
+          </Link>
         </div>
       </div>
     </section>

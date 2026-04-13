@@ -94,8 +94,26 @@ export const projects = [
       { id: 4, name: "GPS Analytics" },
     ],
   },
-  {
+    {
     id: 4,
+    domain: "Full Stack Development",
+    name: "UpTradeLevel MLM Platform",
+    description:
+      "Developed a full-stack MLM platform featuring a referral-based network system, financial modules, JWT authentication, and role-based admin controls.",
+    github: "", 
+    live: "", 
+    image: "/assets/projects/mlm.png",
+    bgImage: "/assets/backgrounds/mlm.png",
+    frameworks: [
+      { id: 1, name: "React" },
+      { id: 2, name: "Node.js" },
+      { id: 3, name: "Express" },
+      { id: 4, name: "JWT" },
+      { id: 5, name: "PM2" },
+    ],
+  },
+  {
+    id: 5,
     domain: "Full Stack Development",
     name: "University Guest House Booking System",
     description:
@@ -112,7 +130,45 @@ export const projects = [
       { id: 5, name: "REST API" },
     ],
   },
+  {
+    id: 6,
+    domain: "Full Stack Development",
+    name: "Ghost Invoice Generator",
+    description:
+      "Built a privacy-first, client-side invoice generator featuring a live A4 split-screen preview, Zustand state management, and Indian business compliance.",
+    github: "",
+    live: "",
+    image: "/assets/projects/ghost-invoice.png",
+    bgImage: "/assets/backgrounds/ghost-invoice.png",
+    frameworks: [
+      { id: 1, name: "React" },
+      { id: 2, name: "Zustand" },
+      { id: 3, name: "Tailwind CSS" },
+      { id: 4, name: "Shadcn UI" },
+      { id: 5, name: "Vite" },
+    ],
+  },
+  {
+    id: 7,
+    domain: "Full Stack Development",
+    name: "Totem Management CRM",
+    description:
+      "Developed a comprehensive agency CRM to streamline digital marketing workflows, client management, and customized course offerings.",
+    github: "",
+    live: "",
+    image: "/assets/projects/totem.png",
+    bgImage: "/assets/backgrounds/totem.png",
+    frameworks: [
+      { id: 1, name: "Next.js" },
+      { id: 2, name: "Node.js" },
+      { id: 3, name: "MongoDB" },
+      { id: 4, name: "Tailwind CSS" },
+    ],
+  },
+
 ];
+
+
 export const socials = [
   
   { name: "LinkedIn", href: "https://www.linkedin.com/in/dhiraj-gogoi-330008274/" },
