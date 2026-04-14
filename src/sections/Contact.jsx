@@ -5,18 +5,13 @@ import { socials } from "../constants";
 import gsap from "gsap";
 import { useRef } from "react";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import Footer from "../components/Footer";
 
 const Contact = () => {
   const containerRef = useRef(null);
   
   const text = `Have a question, idea, or opportunity? I'm always open to connecting and working on meaningful projects.`;
-  const items = [
-    "Say Hello",
-    "Start A Project",
-    "Open For Work",
-    "Let's Chat",
-    "Get In Touch",
-  ];
+
 
   useGSAP(() => {
     gsap.from(".contact-block", {
@@ -45,6 +40,7 @@ const Contact = () => {
           textColor={"text-white"}
           withScrollTrigger={true}
         />
+        
 
         <div 
           ref={containerRef}
@@ -107,30 +103,10 @@ const Contact = () => {
 
       <div className="mt-auto">
         {/* Footer Marquee */}
-        <div className="border-t border-white/10 py-4">
-          <Marquee items={items} className="bg-transparent text-white" />
-        </div>
+        
 
         {/* Sub-Footer: Copyright & Source Code Link */}
-        <div className="flex flex-col items-center justify-between gap-4 border-t border-white/10 px-6 py-6 sm:flex-row md:px-10 lg:px-12">
-          <p className="text-[10px] font-medium uppercase tracking-[0.2rem] text-white/30">
-            &copy; {new Date().getFullYear()} Dhiraj Gogoi.
-          </p>
-          
-          <a
-            href="https://github.com/dhiraj-001/myPortfolio" // Make sure to replace YOUR_REPO_NAME with the actual repo name
-            target="_blank"
-            rel="noreferrer"
-            className="group flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.2rem] text-white/30 transition-colors hover:text-white"
-          >
-            <Icon icon="mdi:github" className="text-sm" />
-            <span>View Source Code</span>
-            <Icon 
-              icon="lucide:arrow-up-right" 
-              className="text-sm transition-transform group-hover:-translate-y-[2px] group-hover:translate-x-[2px]" 
-            />
-          </a>
-        </div>
+       <Footer/>
       </div>
     </section>
   );

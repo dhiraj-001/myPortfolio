@@ -197,7 +197,7 @@ const Navbar = () => {
 
       {/* Floating Burger Button */}
       <button
-  className="fixed right-4 top-4 z-50 flex h-14 w-14 flex-col items-center justify-center gap-[5px] rounded-full border border-gray-400 bg-white/40 backdrop-blur-md shadow-lg transition-all duration-500 hover:scale-105 hover:bg-white/20 sm:right-6 sm:top-6 md:h-16 md:w-16 lg:right-10 lg:top-10"
+  className="fixed right-4 top-4 z-50 flex h-14 w-14 flex-col items-center justify-center gap-[5px] rounded-full border border-gray-400 bg-white/40 backdrop-blur-md shadow-lg transition-all cursor-pointer duration-500 hover:scale-105 hover:bg-white/20 sm:right-6 sm:top-6 md:h-16 md:w-16 lg:right-10 lg:top-10"
   onClick={toggleMenu}
   style={
     showBurger

@@ -170,8 +170,19 @@ export const projects = [
 
 
 export const socials = [
-  
-  { name: "LinkedIn", href: "https://www.linkedin.com/in/dhiraj-gogoi-330008274/" },
-  { name: "GitHub", href: "https://github.com/dhiraj-001/" },
-  { name: "Twitter", href: "https://x.com/DhirajG01" },
+  { 
+    name: "LinkedIn", 
+    href: "https://www.linkedin.com/in/dhiraj-gogoi-330008274/",
+    icon: "mdi:linkedin" 
+  },
+  { 
+    name: "GitHub", 
+    href: "https://github.com/dhiraj-001/",
+    icon: "mdi:github" 
+  },
+  { 
+    name: "Twitter", 
+    href: "https://x.com/DhirajG01",
+    icon: "ri:twitter-x-fill" // Modern X logo
+  },
 ];

@@ -9,20 +9,21 @@ const About = () => {
   const imgRef = useRef(null);
   const contentRef = useRef(null);
 
-  const topMarqueeItems = [
-    "Machine Learning",
-    "Full Stack Web",
-    "Data Pipelines",
-    "API Architecture",
-    "Scalable Systems",
-  ];
 
-  const bottomMarqueeItems = [
+
+  const topMarqueeItems = [
     "Dhiraj Gogoi",
     "Software Developer",
     "ML Enthusiast",
     "Problem Solver",
     "Backend Systems",
+  ];
+    const items = [
+    "Say Hello",
+    "Start A Project",
+    "Open For Work",
+    "Let's Chat",
+    "Get In Touch",
   ];
 
   const headerText =
@@ -74,7 +75,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="min-h-screen rounded-b-[2.5rem] bg-white pb-12 text-black"
+      className="min-h-screen rounded-b-[2.5rem] bg-white text-black"
     >
       <AnimatedHeaderSection
         roles={["Software Developer", "Data Science Aspirant", "ML Enthusiast"]}
@@ -163,16 +164,9 @@ const About = () => {
         </div>
       </div>
 
-      {/* Bottom Subtle Marquee */}
-      <div className="mx-auto mt-4 max-w-[1600px] border-t border-black/10 pt-3">
-        <Marquee
-          items={bottomMarqueeItems}
-          reverse={true}
-          className="bg-transparent text-black"
-          iconClassName="text-black/20"
-          icon="material-symbols-light:square"
-        />
-      </div>
+      <div className="border-t border-white/5 pt-4">
+          <Marquee items={items} className="bg-gray-50 text-black/80" />
+        </div>
     </section>
   );
 };

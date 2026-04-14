@@ -16,7 +16,7 @@ const Hero = () => {
       className="relative flex min-h-screen flex-col justify-end overflow-hidden"
     >
       <AnimatedHeaderSection
-        subTitle={"ML Engineer | Full Stack Developer"}
+        subTitle={"Machine Learning Engineer | Web/App Developer "}
         title={"Dhiraj\u00A0Gogoi"}
         text={text}
         textColor={"text-black"}

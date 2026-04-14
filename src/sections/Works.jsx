@@ -16,15 +16,15 @@ const Works = () => {
 
   const text = `Projects across machine learning, backend systems, and full stack development, built to solve practical real-world problems.`;
 
-const groupedProjects = useMemo(() => {
+  const groupedProjects = useMemo(() => {
     return projects.reduce((acc, project) => {
       if (!acc[project.domain]) acc[project.domain] = [];
-      
+
       // Only push the project if the domain array has fewer than 2 items
       if (acc[project.domain].length < 2) {
         acc[project.domain].push(project);
       }
-      
+
       return acc;
     }, {});
   }, []); // Note: No need to pass 'projects' into dependency array if it's imported as a constant
@@ -33,7 +33,7 @@ const groupedProjects = useMemo(() => {
     return Object.values(groupedProjects).flat();
   }, [groupedProjects]);
 
-  
+
   useGSAP(
     () => {
       gsap.from(".domain-header", {
@@ -146,7 +146,7 @@ const groupedProjects = useMemo(() => {
     <section
       id="works"
       ref={sectionRef}
-      className="flex min-h-screen flex-col bg-[#F9F9F9]"
+      className="flex min-h-screen flex-col "
     >
       <AnimatedHeaderSection
         roles={["ML Systems", "Scalable Web", "API Design"]}
@@ -238,9 +238,9 @@ const groupedProjects = useMemo(() => {
                                 rel="noopener noreferrer"
                                 className="group/btn flex items-center gap-2 rounded-full border border-black/15 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-black/70 transition-all duration-300 hover:border-black hover:bg-black hover:text-white md:group-hover:border-white/20 md:group-hover:text-white/70 md:group-hover:hover:border-white md:group-hover:hover:bg-white md:group-hover:hover:text-black"
                               >
-                                <Icon 
-                                  icon="mdi:github" 
-                                  className="text-sm transition-transform duration-300 group-hover/btn:-rotate-12 group-hover/btn:scale-110" 
+                                <Icon
+                                  icon="mdi:github"
+                                  className="text-sm transition-transform duration-300 group-hover/btn:-rotate-12 group-hover/btn:scale-110"
                                 />
                                 <span>Source</span>
                               </a>
@@ -253,9 +253,9 @@ const groupedProjects = useMemo(() => {
                                 className="group/btn flex items-center gap-2 rounded-full border border-black/15 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-black/70 transition-all duration-300 hover:border-black hover:bg-black hover:text-white md:group-hover:border-white/20 md:group-hover:text-white/70 md:group-hover:hover:border-white md:group-hover:hover:bg-white md:group-hover:hover:text-black"
                               >
                                 <span>Live</span>
-                                <Icon 
-                                  icon="lucide:arrow-up-right" 
-                                  className="text-sm transition-transform duration-300 group-hover/btn:-translate-y-[2px] group-hover/btn:translate-x-[2px]" 
+                                <Icon
+                                  icon="lucide:arrow-up-right"
+                                  className="text-sm transition-transform duration-300 group-hover/btn:-translate-y-[2px] group-hover/btn:translate-x-[2px]"
                                 />
                               </a>
                             )}
@@ -289,15 +289,27 @@ const groupedProjects = useMemo(() => {
             </div>
           ))}
         </div>
-        
+
         {/* Separate Projects Page Link */}
         <div className="mt-24 flex justify-center">
-          <Link 
-            to="/projects" 
-            className="group flex items-center gap-3 rounded-full border border-black/20 px-8 py-4 text-xs font-bold uppercase tracking-widest text-black transition-all duration-500 hover:border-black hover:bg-black hover:text-white md:text-sm"
+          <Link
+            to="/projects"
+            state={{ from: "/#projects" }}
+            className="group relative overflow-hidden rounded-full border border-white/10 bg-white/10 shadow-md shadow-gray-300 0 px-8 py-4 text-xs font-bold uppercase tracking-widest text-black backdrop-blur-md transition-all duration-500 hover:border-black/20 hover:bg-black hover:text-white hover:shadow-[0_10px_30px_rgba(0,0,0,0.12)] md:text-sm"
           >
-            View All Projects
-            <Icon icon="lucide:arrow-right" className="text-lg transition-transform duration-500 group-hover:translate-x-1" />
+            {/* Glass highlight */}
+            <span className="pointer-events-none absolute inset-0 rounded-full bg-[linear-gradient(135deg,rgba(255,255,255,0.55),rgba(255,255,255,0.08)_45%,transparent_70%)] opacity-80" />
+
+            {/* Inner shine */}
+            <span className="pointer-events-none absolute inset-[1px] rounded-full border border-white/40" />
+
+            <span className="relative z-10 flex items-center gap-3">
+              View All Projects
+              <Icon
+                icon="lucide:arrow-right"
+                className="text-lg transition-transform duration-500 group-hover:translate-x-1"
+              />
+            </span>
           </Link>
         </div>
       </div>
