@@ -12,6 +12,7 @@ import { useProgress } from "@react-three/drei";
 import Skills from "./sections/Skills";
 import Projects from "./pages/Projects";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Achievements from "./sections/Achivements";
 
 const App = () => {
   const { progress } = useProgress();
@@ -75,6 +76,7 @@ const App = () => {
                 <Services />
                 <Skills />
                 <Works />
+                <Achievements/>
                 <About />
                 <Contact />
               </>
