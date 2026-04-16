@@ -14,16 +14,16 @@ const Navbar = () => {
   const navRef = useRef(null);
   const linksRef = useRef([]);
   const contactRef = useRef(null);
-  
+
   const topLineRef = useRef(null);
   const bottomLineRef = useRef(null);
-  
+
   const tl = useRef(null);
   const iconTl = useRef(null);
-  
+
   const [isOpen, setIsOpen] = useState(false);
   const [showBurger, setShowBurger] = useState(true);
-  
+
   useGSAP(() => {
     // Initial setups
     gsap.set(overlayRef.current, { autoAlpha: 0 });
@@ -101,7 +101,7 @@ const Navbar = () => {
       setShowBurger(isOpen || currentScrollY <= lastScrollY || currentScrollY < 10);
       lastScrollY = currentScrollY;
     };
-    
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isOpen]);
@@ -124,7 +124,7 @@ const Navbar = () => {
   return (
     <>
       {/* Background Overlay (Click to close) */}
-      <div 
+      <div
         ref={overlayRef}
         onClick={closeMenu}
         className="fixed inset-0 z-40 hidden bg-black/40 backdrop-blur-sm md:block"
@@ -137,7 +137,7 @@ const Navbar = () => {
       >
         {/* Navigation Links */}
         <div className="flex flex-col gap-y-4">
-          {["home", "services", "skills", "works", "about", "contact"].map(
+          {["home", "services", "skills", "works", "achievements", "about", "contact"].map(
             (section, index) => (
               <div key={index} ref={(el) => (linksRef.current[index] = el)} className="overflow-hidden">
                 <Link
@@ -166,8 +166,8 @@ const Navbar = () => {
             <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.2rem] text-white/30">
               E-mail
             </p>
-            <a 
-              href="mailto:gogoidhiraj207@gmail.com" 
+            <a
+              href="mailto:gogoidhiraj207@gmail.com"
               className="text-sm font-light tracking-widest text-white/80 transition-colors hover:text-white sm:text-base"
             >
               gogoidhiraj207@gmail.com
@@ -197,24 +197,24 @@ const Navbar = () => {
 
       {/* Floating Burger Button */}
       <button
-  className="fixed right-4 top-4 z-50 flex h-14 w-14 flex-col items-center justify-center gap-[5px] rounded-full border border-gray-400 bg-white/40 backdrop-blur-md shadow-lg transition-all cursor-pointer duration-500 hover:scale-105 hover:bg-white/20 sm:right-6 sm:top-6 md:h-16 md:w-16 lg:right-10 lg:top-10"
-  onClick={toggleMenu}
-  style={
-    showBurger
-      ? { clipPath: "circle(50% at 50% 50%)", opacity: 1, pointerEvents: "auto" }
-      : { clipPath: "circle(0% at 50% 50%)", opacity: 0, pointerEvents: "none" }
-  }
-  aria-label="Toggle Menu"
->
-  <span
-    ref={topLineRef}
-    className="block h-[1.5px] w-6 origin-center rounded-full bg-gray-400 md:w-7 shadow-[0_0_8px_rgba(255,255,255,0.3)]"
-  ></span>
-  <span
-    ref={bottomLineRef}
-    className="block h-[1.5px] w-6 origin-center rounded-full bg-gray-400 md:w-7 shadow-[0_0_8px_rgba(255,255,255,0.3)]"
-  ></span>
-</button>
+        className="fixed right-4 top-4 z-50 flex h-14 w-14 flex-col items-center justify-center gap-[5px] rounded-full border border-gray-400 bg-white/40 backdrop-blur-md shadow-lg transition-all cursor-pointer duration-500 hover:scale-105 hover:bg-white/20 sm:right-6 sm:top-6 md:h-16 md:w-16 lg:right-10 lg:top-10"
+        onClick={toggleMenu}
+        style={
+          showBurger
+            ? { clipPath: "circle(50% at 50% 50%)", opacity: 1, pointerEvents: "auto" }
+            : { clipPath: "circle(0% at 50% 50%)", opacity: 0, pointerEvents: "none" }
+        }
+        aria-label="Toggle Menu"
+      >
+        <span
+          ref={topLineRef}
+          className="block h-[1.5px] w-6 origin-center rounded-full bg-gray-400 md:w-7 shadow-[0_0_8px_rgba(255,255,255,0.3)]"
+        ></span>
+        <span
+          ref={bottomLineRef}
+          className="block h-[1.5px] w-6 origin-center rounded-full bg-gray-400 md:w-7 shadow-[0_0_8px_rgba(255,255,255,0.3)]"
+        ></span>
+      </button>
     </>
   );
 };

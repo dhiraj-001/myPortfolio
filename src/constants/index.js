@@ -101,7 +101,7 @@ export const projects = [
     description:
       "Developed a full-stack MLM platform featuring a referral-based network system, financial modules, JWT authentication, and role-based admin controls.",
     github: "", 
-    live: "", 
+    live: "https://uptradelevel.com/", 
     image: "/assets/projects/mlm.png",
     bgImage: "/assets/backgrounds/mlm.png",
     frameworks: [
@@ -155,7 +155,7 @@ export const projects = [
     description:
       "Developed a comprehensive agency CRM to streamline digital marketing workflows, client management, and customized course offerings.",
     github: "",
-    live: "",
+    live: "https://www.totemservices.org/",
     image: "/assets/projects/totem.png",
     bgImage: "/assets/backgrounds/totem.png",
     frameworks: [
