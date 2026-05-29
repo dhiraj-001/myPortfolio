@@ -189,8 +189,8 @@ export const projects = [
       "A React Native app using Socket.io for real-time booking updates, featuring dynamic Context-driven theming and robust client-side validation.",
     github: "https://github.com/dhiraj-001/ExpertApp",
     live: "https://github.com/dhiraj-001/ExpertApp/releases/tag/v1.0.0",
-    image: "/assets/projects/vedaz.png",
-    bgImage: "/assets/backgrounds/vedaz.png",
+    image: "/assets/projects/vedaz.jpeg",
+    bgImage: "/assets/backgrounds/vedaz.jpeg",
     frameworks: [
       { id: 1, name: "React Native" },
       { id: 2, name: "Expo" },
