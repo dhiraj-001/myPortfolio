@@ -27,7 +27,7 @@ const Hero = () => {
         style={{ width: "100%", height: "100dvh" }} // Use 100dvh for better mobile scrolling
       >
         <Canvas
-          shadows
+          dpr={[1, 1.5]}
           camera={{
             position: [0, 0, -10],
             fov: isMobile ? 22 : 17.5,
