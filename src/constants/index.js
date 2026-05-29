@@ -165,7 +165,39 @@ export const projects = [
       { id: 4, name: "Tailwind CSS" },
     ],
   },
-
+  {
+    id: 8,
+    domain: "App Development",
+    name: "Booking System AUS - Mobile App",
+    description:
+      "A React Native mobile frontend for the Assam University Silchar (AUS) Booking System, providing a native mobile experience for resource booking, user authentication, and notifications.",
+    github: "https://github.com/dhiraj-001/aus_booking_system_application",
+    live: "https://github.com/dhiraj-001/aus_booking_system_application/releases/tag/v1.0.0",
+    image: "/assets/projects/booking-system.png",
+    bgImage: "/assets/backgrounds/booking-system.png",
+    frameworks: [
+      { id: 1, name: "React Native" },
+      { id: 2, name: "Expo" },
+      { id: 3, name: "Axios" },
+    ],
+  },
+  {
+    id: 9,
+    domain: "App Development",
+    name: "Vedaz Expert Booking App",
+    description:
+      "A React Native app using Socket.io for real-time booking updates, featuring dynamic Context-driven theming and robust client-side validation.",
+    github: "https://github.com/dhiraj-001/ExpertApp",
+    live: "https://github.com/dhiraj-001/ExpertApp/releases/tag/v1.0.0",
+    image: "/assets/projects/vedaz.png",
+    bgImage: "/assets/backgrounds/vedaz.png",
+    frameworks: [
+      { id: 1, name: "React Native" },
+      { id: 2, name: "Expo" },
+      { id: 3, name: "Socket.io" },
+      { id: 4, name: "React Context" },
+    ],
+  },
 ];
 
 
