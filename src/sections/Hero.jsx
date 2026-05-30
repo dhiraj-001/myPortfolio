@@ -3,15 +3,29 @@ import { Planet } from "../components/Planet";
 import { Environment, Float, Lightformer } from "@react-three/drei";
 import { useMediaQuery } from "react-responsive";
 import AnimatedHeaderSection from "../components/AnimatedHeaderSection";
-import { Suspense } from "react"; // 👈 Import Suspense
+import { Suspense, useRef, useState, useEffect } from "react";
 
 const Hero = () => {
   const isMobile = useMediaQuery({ maxWidth: 853 });
+  const [isInView, setIsInView] = useState(true);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { rootMargin: "200px" }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   const text = `Building production-ready web applications and intelligent ML systems to solve real-world problems.`;
 
   return (
     <section
+      ref={sectionRef}
       id="home"
       className="relative flex min-h-screen flex-col justify-end overflow-hidden"
     >
@@ -27,8 +41,9 @@ const Hero = () => {
         style={{ width: "100%", height: "100dvh" }} // Use 100dvh for better mobile scrolling
       >
         <Canvas
+          frameloop={isInView ? "always" : "demand"}
           dpr={[1, 1.5]}
-          gl={{ antialias: false, powerPreference: "high-performance" }}
+          gl={{ antialias: false }}
           camera={{
             position: [0, 0, -10],
             fov: isMobile ? 22 : 17.5,
@@ -44,7 +59,7 @@ const Hero = () => {
               <Planet scale={isMobile ? 0.72 : 1} />
             </Float>
 
-            <Environment resolution={256} frames={1}>
+            <Environment resolution={64}>
               <group rotation={[-Math.PI / 3, 4, 1]}>
                 <Lightformer
                   form="circle"

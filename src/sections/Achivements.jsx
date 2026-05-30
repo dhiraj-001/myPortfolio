@@ -16,6 +16,11 @@ const achievements = [
     description:
       "Developed a LightGBM regression model for large-scale data, achieving an SMPE score of 48.6 through feature engineering and model tuning.",
   },
+  {
+    title: "Semi-Finalist – ET-AI Hackathon 2026",
+    description:
+      "Emerged as a Semi-Finalist in The Economic Times AI Hackathon, commended for innovation, collaborative spirit, and commitment to building meaningful AI solutions.",
+  },
 ];
 
 const Achievements = () => {
