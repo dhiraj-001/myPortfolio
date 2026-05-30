@@ -28,6 +28,7 @@ const Hero = () => {
       >
         <Canvas
           dpr={[1, 1.5]}
+          gl={{ antialias: false, powerPreference: "high-performance" }}
           camera={{
             position: [0, 0, -10],
             fov: isMobile ? 22 : 17.5,
@@ -43,7 +44,7 @@ const Hero = () => {
               <Planet scale={isMobile ? 0.72 : 1} />
             </Float>
 
-            <Environment resolution={256}>
+            <Environment resolution={256} frames={1}>
               <group rotation={[-Math.PI / 3, 4, 1]}>
                 <Lightformer
                   form="circle"
