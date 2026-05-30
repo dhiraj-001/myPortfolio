@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import AnimatedHeaderSection from "../components/AnimatedHeaderSection";
 import Marquee from "../components/Marquee";
+import { Icon } from "@iconify/react/dist/iconify.js";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
@@ -158,6 +159,33 @@ const About = () => {
                   </span>
                 ))}
               </div>
+            </div>
+
+            {/* Resume Call to Action */}
+            <div className="reveal-item mt-6 flex flex-wrap items-center gap-4 pt-2">
+              <a
+                href="assets/resume/dhiraj_resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-2 rounded-full bg-black px-6 py-3.5 text-[11px] font-bold uppercase tracking-[0.15rem] text-white transition-all hover:scale-105 hover:bg-black/90 shadow-lg shadow-black/10"
+              >
+                <span>View Resume</span>
+                <Icon
+                  icon="lucide:arrow-up-right"
+                  className="text-lg transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
+              </a>
+              {/* <a
+                href="/resume.pdf"
+                download="Dhiraj_Gogoi_Resume.pdf"
+                className="group flex items-center gap-2 rounded-full border border-black/20 bg-transparent px-6 py-3.5 text-[11px] font-bold uppercase tracking-[0.15rem] text-black transition-all hover:border-black hover:bg-black/5"
+              >
+                <span>Download CV</span>
+                <Icon
+                  icon="lucide:download"
+                  className="text-lg transition-transform group-hover:translate-y-0.5"
+                />
+              </a> */}
             </div>
 
           </div>
