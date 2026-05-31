@@ -173,8 +173,8 @@ export const projects = [
       "A React Native mobile frontend for the Assam University Silchar (AUS) Booking System, providing a native mobile experience for resource booking, user authentication, and notifications.",
     github: "https://github.com/dhiraj-001/aus_booking_system_application",
     live: "https://github.com/dhiraj-001/aus_booking_system_application/releases/tag/v1.0.0",
-    image: "/assets/projects/booking-system.png",
-    bgImage: "/assets/backgrounds/booking-system.png",
+    image: "/assets/projects/aus-booking-mobile.png",
+    bgImage: "/assets/backgrounds/aus-booking-mobile.png",
     frameworks: [
       { id: 1, name: "React Native" },
       { id: 2, name: "Expo" },
@@ -189,8 +189,8 @@ export const projects = [
       "A React Native app using Socket.io for real-time booking updates, featuring dynamic Context-driven theming and robust client-side validation.",
     github: "https://github.com/dhiraj-001/ExpertApp",
     live: "https://github.com/dhiraj-001/ExpertApp/releases/tag/v1.0.0",
-    image: "/assets/projects/vedaz.jpeg",
-    bgImage: "/assets/backgrounds/vedaz.jpeg",
+    image: "/assets/projects/expertapp.png",
+    bgImage: "/assets/backgrounds/expertapp.png",
     frameworks: [
       { id: 1, name: "React Native" },
       { id: 2, name: "Expo" },
@@ -217,4 +217,25 @@ export const socials = [
     href: "https://x.com/DhirajG01",
     icon: "ri:twitter-x-fill" // Modern X logo
   },
+];
+
+export const workExperiences = [
+  {
+    id: 1,
+    name: "Full Stack Developer",
+    pos: "ANOVAS",
+    duration: "Oct 2024 – Dec 2025",
+    title: "• Developed and deployed 5+ production-level web applications for clients.\n• Built REST APIs for authentication, data handling, and role-based access.\n• Managed deployment environments, domains, and production debugging.",
+    icon: "/assets/placeholder.svg",
+    animation: "victory",
+  },
+  {
+    id: 2,
+    name: "Full Stack Technology Developer (Intern)",
+    pos: "MyNadezhda Consultancy Services",
+    duration: "Jun 2026 – Present",
+    title: "• Working on full-stack development projects using modern frameworks like Nuxt.js, Fastify, and FastAPI.\n• Participating in code reviews, testing, and debugging within a Linux (Ubuntu) environment.\n• Collaborating with team members to build and manage database solutions using PostgreSQL.",
+    icon: "/assets/placeholder.svg",
+    animation: "victory", // You can change this if you have different animations set up
+  }
 ];

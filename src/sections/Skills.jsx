@@ -14,7 +14,7 @@ const Skills = () => {
     {
       title: "Core Languages",
       icon: "lucide:code-2",
-      skills: ["JavaScript", "Python","C", "C++",  "SQL", "Bash"],
+      skills: ["JavaScript", "Python", "C", "C++", "SQL", "Bash"],
       description: "Strong foundation in programming, problem solving, and system-level thinking.",
     },
     {
@@ -93,11 +93,7 @@ const Skills = () => {
 
       <div className="px-4 pb-20 sm:px-6 md:px-8 lg:px-10">
         <div className="mx-auto max-w-7xl">
-          {/* <div className="mb-16 max-w-4xl text-white/70">
-            <div className="text-base font-light leading-relaxed tracking-wide sm:text-lg md:text-xl">
-              <AnimatedTextLines text={skillsIntroduction} className="w-full" />
-            </div>
-          </div> */}
+          
 
           <div
             ref={contentRef}
@@ -105,17 +101,17 @@ const Skills = () => {
           >
             {skillCategories.map((category, index) => (
               <div
-  key={category.title}
-  className="skill-card-item relative flex flex-col justify-between overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.02] p-6 transition-all duration-300 hover:bg-white/[0.05]"
->
+                key={category.title}
+                className="skill-card-item relative flex flex-col justify-between overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.02] p-6 transition-all duration-300 hover:bg-white/[0.05]"
+              >
                 <div>
                   <div className="mb-6 flex items-center justify-between">
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/5 text-white/80">
                       <Icon icon={category.icon} className="text-2xl" />
                     </div>
                     <span className="pointer-events-none absolute top-2 right-4 select-none text-[96px] font-bold leading-none tracking-[-4px] text-white/[0.04]">
-    0{index + 1}
-  </span>
+                      0{index + 1}
+                    </span>
                   </div>
 
                   <h3 className="mb-3 text-lg font-medium tracking-tight text-white">

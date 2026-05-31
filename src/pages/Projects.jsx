@@ -184,11 +184,13 @@ const Projects = () => {
                                 {/* Project image */}
                                 {project.image && (
                                     <div className="relative h-52 w-full overflow-hidden rounded-t-[1.5rem] sm:h-56 bg-black/5">
-                                        <img
-                                            src={project.image}
-                                            alt={project.name}
-                                            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                                        />
+                                            <img
+                                                src={project.image}
+                                                alt={project.name}
+                                                className={`h-full w-full transition-transform duration-700 ease-out group-hover:scale-105 ${
+                                                    project.domain === "App Development" ? "object-contain py-2" : "object-cover"
+                                                }`}
+                                            />
                                     </div>
                                 )}
 

@@ -13,6 +13,7 @@ import Skills from "./sections/Skills";
 import Projects from "./pages/Projects";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Achievements from "./sections/Achivements";
+import Experience from "./sections/Experience";
 
 const App = () => {
   const { progress } = useProgress();
@@ -75,6 +76,7 @@ const App = () => {
                 <Hero />
                 <Services />
                 <Skills />
+                <Experience />
                 <Works />
                 <Achievements/>
                 <About />
