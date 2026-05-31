@@ -137,11 +137,11 @@ const Navbar = () => {
       >
         {/* Navigation Links */}
         <div className="flex flex-col gap-y-4">
-          {["home", "services", "skills", "works", "achievements", "about", "contact"].map(
+          {["home", "services", "skills", "experience", "works", "achievements", "about", "contact"].map(
             (section, index) => (
               <div key={index} ref={(el) => (linksRef.current[index] = el)} className="overflow-hidden">
                 <Link
-                  className="group inline-block cursor-pointer text-4xl font-light uppercase tracking-tighter text-white/70 transition-colors hover:text-white sm:text-5xl lg:text-6xl"
+                  className="group inline-block cursor-pointer text-3xl font-light uppercase tracking-tighter text-white/70 transition-colors hover:text-white sm:text-3xl lg:text-5xl"
                   to={`${section}`}
                   smooth
                   offset={0}
