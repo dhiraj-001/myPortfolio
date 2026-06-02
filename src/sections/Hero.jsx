@@ -21,7 +21,7 @@ const Hero = () => {
     return () => observer.disconnect();
   }, []);
 
-  const text = `Building production-ready web applications and intelligent ML systems to solve real-world problems.`;
+  const text = `Full Stack Developer & Machine Learning Engineer crafting scalable web applications and intelligent AI systems. Specializing in React, Node.js, and predictive data models.`;
 
   return (
     <section

@@ -12,6 +12,7 @@ import { useProgress } from "@react-three/drei";
 import Skills from "./sections/Skills";
 import Projects from "./pages/Projects";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import Achievements from "./sections/Achivements";
 import Experience from "./sections/Experience";
 
@@ -43,9 +44,9 @@ const App = () => {
         <div className="flex flex-col items-center gap-6">
           {/* Large Minimalist Percentage */}
           <div className="overflow-hidden">
-            <h1 className="text-5xl font-light tracking-tighter text-white md:text-7xl">
+            <p className="text-5xl font-light tracking-tighter text-white md:text-7xl">
               {Math.floor(progress)}<span className="text-white/20">%</span>
-            </h1>
+            </p>
           </div>
 
           {/* 1px Sleek Progress Line */}
@@ -62,7 +63,30 @@ const App = () => {
           </p>
         </div>
       </div>
-      <Router>
+      <HelmetProvider>
+        <Helmet>
+          <title>Dhiraj Gogoi - Full Stack & Machine Learning Engineer</title>
+          <meta name="description" content="Portfolio of Dhiraj Gogoi, a Full Stack Developer & Machine Learning Engineer specializing in React, Node.js, and predictive data models." />
+          <meta property="og:title" content="Dhiraj Gogoi - Portfolio" />
+          <meta property="og:description" content="Full Stack Developer & Machine Learning Engineer crafting scalable web applications and intelligent AI systems." />
+          <meta property="og:type" content="website" />
+          <script type="application/ld+json">
+            {`
+              {
+                "@context": "https://schema.org/",
+                "@type": "Person",
+                "name": "Dhiraj Gogoi",
+                "jobTitle": "Full Stack Developer & Machine Learning Engineer",
+                "url": "https://dhirajgogoi.com",
+                "sameAs": [
+                  "https://www.linkedin.com/in/dhiraj-gogoi-330008274/",
+                  "https://github.com/dhiraj-001/"
+                ]
+              }
+            `}
+          </script>
+        </Helmet>
+        <Router>
         <Navbar />
         {/* Main Content Reveal */}
         <div
@@ -86,7 +110,8 @@ const App = () => {
             <Route path="/projects" element={<Projects />} />
           </Routes>
         </div>
-      </Router>
+        </Router>
+      </HelmetProvider>
       </main>
     </ReactLenis>
   );

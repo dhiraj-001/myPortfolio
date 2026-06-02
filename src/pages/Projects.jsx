@@ -7,6 +7,7 @@ import { projects } from "../constants";
 import { Link, useLocation } from "react-router-dom";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Footer from "../components/Footer";
+import { Helmet } from "react-helmet-async";
 
 // Derive unique domain filters from the data
 const getFilters = (data) => ["All", ...Array.from(new Set(data.map((p) => p.domain)))];
@@ -78,6 +79,10 @@ const Projects = () => {
             ref={sectionRef}
             className="min-h-screen rounded-b-[2.5rem] bg-white text-black"
         >
+            <Helmet>
+                <title>Projects - Dhiraj Gogoi</title>
+                <meta name="description" content="A collection of web, application, and AI/ML projects built by Dhiraj Gogoi." />
+            </Helmet>
             {/* Custom Animated Header Section */}
             <div className="flex flex-col items-center justify-center px-4 pb-16 pt-32 text-center sm:px-6 md:px-10 lg:pt-40">
                 <div className="mx-auto max-w-5xl">

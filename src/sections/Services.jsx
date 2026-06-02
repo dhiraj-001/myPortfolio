@@ -6,7 +6,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
 const Services = () => {
-  const text = `My work spans full stack development, backend engineering, deployment, and applied machine learning projects.`;
+  const text = `I architect end-to-end digital solutions—from responsive Next.js frontends and robust REST APIs to applied machine learning models for anomaly detection and forecasting.`;
 
   const serviceRefs = useRef([]);
   const isDesktop = useMediaQuery({ minWidth: "48rem" });
