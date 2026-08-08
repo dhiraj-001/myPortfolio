@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import AnimatedHeaderSection from "../components/AnimatedHeaderSection";
-import { projects } from "../constants";
-import { useMemo, useRef } from "react";
+import { projects as staticProjects } from "../constants";
+import { useMemo, useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -16,69 +16,136 @@ const Works = () => {
 
   const text = `Projects across machine learning, backend systems, and full stack development, built to solve practical real-world problems.`;
 
+  const [projectsList, setProjectsList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const startTime = Date.now();
+      try {
+        const response = await fetch(`${API_BASE_URL}/projects`);
+        let data = [];
+        if (response.ok) {
+          data = await response.json();
+        }
+
+        // Guarantee a minimum display of 800ms to allow skeletons to animate cleanly
+        const elapsed = Date.now() - startTime;
+        const delay = Math.max(0, 800 - elapsed);
+        await new Promise((resolve) => setTimeout(resolve, delay));
+
+        if (data && data.length > 0) {
+          const mappedData = data.map((p, idx) => ({
+            ...p,
+            id: p._id || p.id || idx,
+            frameworks: p.frameworks ? p.frameworks.map((fw, fidx) => ({
+              id: fw._id || fidx,
+              name: fw.name
+            })) : []
+          }));
+          setProjectsList(mappedData);
+        } else {
+          setProjectsList(staticProjects);
+        }
+      } catch (err) {
+        console.error("Failed to fetch projects from backend:", err);
+        const elapsed = Date.now() - startTime;
+        const delay = Math.max(0, 800 - elapsed);
+        await new Promise((resolve) => setTimeout(resolve, delay));
+        setProjectsList(staticProjects);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
   const groupedProjects = useMemo(() => {
-    return projects.reduce((acc, project) => {
+    return projectsList.reduce((acc, project) => {
       if (!acc[project.domain]) acc[project.domain] = [];
 
-      // Only push the project if the domain array has fewer than 2 items
+      // Only push the project if the domain array has fewer than 2 items (limit for Works section summary)
       if (acc[project.domain].length < 2) {
         acc[project.domain].push(project);
       }
 
       return acc;
     }, {});
-  }, []); // Note: No need to pass 'projects' into dependency array if it's imported as a constant
+  }, [projectsList]);
 
   const flatProjects = useMemo(() => {
     return Object.values(groupedProjects).flat();
   }, [groupedProjects]);
 
-
   useGSAP(
     () => {
-      gsap.from(".domain-header", {
-        y: 24,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
-          once: true,
-        },
-      });
+      if (loading || flatProjects.length === 0) return;
+      
+      // Animate domain headers
+      gsap.fromTo(".domain-header", 
+        { y: 24, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+            once: true,
+          },
+        }
+      );
 
+      // Animate project rows
       document.querySelectorAll(".project-row").forEach((row, i) => {
-        gsap.from(row, {
-          y: 48,
-          opacity: 0,
-          duration: 0.9,
-          delay: i * 0.04,
-          ease: "power4.out",
-          scrollTrigger: {
-            trigger: row,
-            start: "top 88%",
-            once: true,
-          },
-        });
+        gsap.fromTo(row,
+          { y: 48, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.9,
+            delay: i * 0.04,
+            ease: "power4.out",
+            scrollTrigger: {
+              trigger: row,
+              start: "top 88%",
+              once: true,
+            },
+          }
+        );
       });
 
+      // Animate divider lines
       document.querySelectorAll(".domain-line").forEach((line) => {
-        gsap.from(line, {
-          scaleX: 0,
-          transformOrigin: "left center",
-          duration: 1.2,
-          ease: "power4.inOut",
-          scrollTrigger: {
-            trigger: line,
-            start: "top 85%",
-            once: true,
-          },
-        });
+        gsap.fromTo(line,
+          { scaleX: 0 },
+          {
+            scaleX: 1,
+            transformOrigin: "left center",
+            duration: 1.2,
+            ease: "power4.inOut",
+            scrollTrigger: {
+              trigger: line,
+              start: "top 85%",
+              once: true,
+            },
+          }
+        );
       });
+
+      // Recalculate positions after rendering layout change
+      const refreshTimeout = setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 200);
+
+      return () => clearTimeout(refreshTimeout);
     },
-    { scope: sectionRef, dependencies: [flatProjects] }
+    { scope: sectionRef, dependencies: [flatProjects, loading] }
   );
 
   const handleMouseEnter = (index) => {
@@ -146,7 +213,7 @@ const Works = () => {
     <section
       id="works"
       ref={sectionRef}
-      className="flex min-h-screen flex-col "
+      className="flex min-h-screen flex-col bg-white text-black"
     >
       <AnimatedHeaderSection
         roles={["ML Systems", "Scalable Web", "API Design"]}
@@ -158,136 +225,157 @@ const Works = () => {
 
       <div className="px-4 pb-32 sm:px-8 md:px-12">
         <div className="mx-auto max-w-7xl">
-          {Object.entries(groupedProjects).map(([domain, domainProjects]) => (
-            <div key={domain} className="domain-header mt-28 first:mt-10">
-              <div className="mb-14 flex items-end justify-between pb-5">
-                <h2 className="text-4xl font-bold uppercase tracking-tighter text-black md:text-6xl">
-                  {domain}
-                </h2>
-                <span className="mb-1 text-[10px] font-bold uppercase tracking-[0.25rem] text-black/25">
-                  {domainProjects.length} Projects
-                </span>
-              </div>
-              <div className="domain-line mb-0 h-px w-full origin-left bg-black/10" />
+          {loading ? (
+            /* Premium loading skeletons for the Works summary */
+            <div className="flex flex-col gap-10 mt-10">
+              {[1, 2, 3].map((n) => (
+                <div key={n} className="flex flex-col gap-8 md:flex-row md:items-center border-b border-black/10 py-10 last:border-none animate-pulse">
+                  <div className="flex-1 flex flex-col gap-4">
+                    <div className="h-4 w-12 bg-black/10 rounded" />
+                    <div className="h-8 w-2/3 bg-black/10 rounded" />
+                    <div className="h-16 w-full bg-black/10 rounded" />
+                    <div className="flex gap-2 mt-2">
+                      <div className="h-6 w-14 bg-black/10 rounded-full" />
+                      <div className="h-6 w-20 bg-black/10 rounded-full" />
+                      <div className="h-6 w-16 bg-black/10 rounded-full" />
+                    </div>
+                  </div>
+                  <div className="aspect-video w-full md:w-1/3 bg-black/5 rounded-2xl" />
+                </div>
+              ))}
+            </div>
+          ) : (
+            Object.entries(groupedProjects).map(([domain, domainProjects]) => (
+              <div key={domain} className="domain-header mt-28 first:mt-10 animate-fade-in">
+                <div className="mb-14 flex items-end justify-between pb-5">
+                  <h2 className="text-4xl font-bold uppercase tracking-tighter text-black md:text-6xl animate-fade-in">
+                    {domain}
+                  </h2>
+                  <span className="mb-1 text-[10px] font-bold uppercase tracking-[0.25rem] text-black/25">
+                    {domainProjects.length} Projects
+                  </span>
+                </div>
+                <div className="domain-line mb-0 h-px w-full origin-left bg-black/10" />
 
-              <div className="flex flex-col">
-                {domainProjects.map((project) => {
-                  const currentIndex = globalIndex++;
-                  const num =
-                    currentIndex + 1 < 10
-                      ? `0${currentIndex + 1}`
-                      : `${currentIndex + 1}`;
+                <div className="flex flex-col">
+                  {domainProjects.map((project) => {
+                    const currentIndex = globalIndex++;
+                    const num =
+                      currentIndex + 1 < 10
+                        ? `0${currentIndex + 1}`
+                        : `${currentIndex + 1}`;
 
-                  return (
-                    <div
-                      key={project.id}
-                      className="project-row group relative cursor-pointer border-b border-black/10 py-10 last:border-none"
-                      onMouseEnter={() => handleMouseEnter(currentIndex)}
-                      onMouseLeave={() => {
-                        handleMouseLeave(currentIndex);
-                        handleMouseLeaveImg(currentIndex);
-                      }}
-                    >
+                    return (
                       <div
-                        ref={(el) => (overlayRefs.current[currentIndex] = el)}
-                        className="pointer-events-none absolute inset-0 -z-10 bg-black"
-                        style={{ clipPath: "inset(100% 0% 0% 0%)" }}
-                      />
+                        key={project.id}
+                        className="project-row group relative cursor-pointer border-b border-black/10 py-10 last:border-none"
+                        onMouseEnter={() => handleMouseEnter(currentIndex)}
+                        onMouseLeave={() => {
+                          handleMouseLeave(currentIndex);
+                          handleMouseLeaveImg(currentIndex);
+                        }}
+                      >
+                        <div
+                          ref={(el) => (overlayRefs.current[currentIndex] = el)}
+                          className="pointer-events-none absolute inset-0 -z-10 bg-black"
+                          style={{ clipPath: "inset(100% 0% 0% 0%)" }}
+                        />
 
-                      <div className="grid grid-cols-1 gap-8 md:grid-cols-[1.6fr_1fr] md:items-center md:px-6">
-                        <div className="flex flex-col gap-5">
-                          <div className="flex items-start gap-6">
-                            <span className="mt-1 min-w-[28px] text-[20px] font-bold tabular-nums text-black/20 transition-colors duration-500 md:group-hover:text-white/20">
-                              {num}
-                            </span>
+                        <div className="grid grid-cols-1 gap-8 md:grid-cols-[1.6fr_1fr] md:items-center md:px-6">
+                          <div className="flex flex-col gap-5">
+                            <div className="flex items-start gap-6">
+                              <span className="mt-1 min-w-[28px] text-[20px] font-bold tabular-nums text-black/20 transition-colors duration-500 md:group-hover:text-white/20">
+                                {num}
+                              </span>
 
-                            <div className="flex-1">
-                              <div className="flex items-start justify-between gap-4">
-                                <h3 className="text-3xl font-medium tracking-tight text-black transition-colors duration-500 md:group-hover:text-white md:text-4xl">
-                                  {project.name}
-                                </h3>
-                                <Icon
-                                  icon="lucide:arrow-up-right"
-                                  className="mt-1 size-6 shrink-0 -translate-x-1 translate-y-1 text-white opacity-0 transition-all duration-500 md:group-hover:translate-x-0 md:group-hover:translate-y-0 md:group-hover:opacity-100"
-                                />
+                              <div className="flex-1">
+                                <div className="flex items-start justify-between gap-4">
+                                  <h3 className="text-3xl font-medium tracking-tight text-black transition-colors duration-500 md:group-hover:text-white md:text-4xl">
+                                    {project.name}
+                                  </h3>
+                                  <Icon
+                                    icon="lucide:arrow-up-right"
+                                    className="mt-1 size-6 shrink-0 -translate-x-1 translate-y-1 text-white opacity-0 transition-all duration-500 md:group-hover:translate-x-0 md:group-hover:translate-y-0 md:group-hover:opacity-100"
+                                  />
+                                </div>
+
+                                <p className="mt-3 max-w-lg text-[15px] leading-relaxed text-black/50 transition-colors duration-500 md:group-hover:text-white/55">
+                                  {project.description}
+                                </p>
                               </div>
+                            </div>
 
-                              <p className="mt-3 max-w-lg text-[15px] leading-relaxed text-black/50 transition-colors duration-500 md:group-hover:text-white/55">
-                                {project.description}
-                              </p>
+                            <div className="ml-[52px] flex flex-wrap gap-2">
+                              {project.frameworks.map((fw) => (
+                                <span
+                                  key={fw.id}
+                                  className="rounded-full border border-black/[0.06] bg-black/[0.04] px-3 py-[5px] text-[10px] font-semibold uppercase tracking-widest text-black/50 transition-all duration-500 md:group-hover:border-white/10 md:group-hover:bg-white/[0.06] md:group-hover:text-white/65"
+                                >
+                                  {fw.name}
+                                </span>
+                              ))}
+                            </div>
+
+                            {/* Upgraded Buttons Section */}
+                            <div className="ml-[52px] mt-2 flex items-center gap-4">
+                              {project.github && (
+                                <a
+                                  href={project.github}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="group/btn flex items-center gap-2 rounded-full border border-black/15 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-black/70 transition-all duration-300 hover:border-black hover:bg-black hover:text-white md:group-hover:border-white/20 md:group-hover:text-white/70 md:group-hover:hover:border-white md:group-hover:hover:bg-white md:group-hover:hover:text-black"
+                                >
+                                  <Icon
+                                    icon="mdi:github"
+                                    className="text-sm transition-transform duration-300 group-hover/btn:-rotate-12 group-hover/btn:scale-110"
+                                  />
+                                  <span>Source</span>
+                                </a>
+                              )}
+                              {project.live && (
+                                <a
+                                  href={project.live}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="group/btn flex items-center gap-2 rounded-full border border-black/15 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-black/70 transition-all duration-300 hover:border-black hover:bg-black hover:text-white md:group-hover:border-white/20 md:group-hover:text-white/70 md:group-hover:hover:border-white md:group-hover:hover:bg-white md:group-hover:hover:text-black"
+                                >
+                                  <span>Live</span>
+                                  <Icon
+                                    icon="lucide:arrow-up-right"
+                                    className="text-sm transition-transform duration-300 group-hover/btn:-translate-y-[2px] group-hover/btn:translate-x-[2px]"
+                                  />
+                                </a>
+                              )}
                             </div>
                           </div>
 
-                          <div className="ml-[52px] flex flex-wrap gap-2">
-                            {project.frameworks.map((fw) => (
-                              <span
-                                key={fw.id}
-                                className="rounded-full border border-black/[0.06] bg-black/[0.04] px-3 py-[5px] text-[10px] font-semibold uppercase tracking-widest text-black/50 transition-all duration-500 md:group-hover:border-white/10 md:group-hover:bg-white/[0.06] md:group-hover:text-white/65"
-                              >
-                                {fw.name}
-                              </span>
-                            ))}
+                          <div
+                            ref={(el) => (imageRefs.current[currentIndex] = el)}
+                            className="relative aspect-video overflow-hidden rounded-2xl bg-black/[0.04]"
+                            style={{ transformStyle: "preserve-3d" }}
+                            onMouseMove={(e) => handleMouseMove(e, currentIndex)}
+                          >
+                            <img
+                              src={project.bgImage}
+                              alt=""
+                              aria-hidden="true"
+                              className="absolute inset-0 h-full w-full object-cover opacity-15 grayscale transition-all duration-700 md:group-hover:opacity-35 md:group-hover:grayscale-0"
+                            />
+                            <img
+                              src={project.image}
+                              alt={project.name}
+                              className="absolute inset-0 h-full w-full scale-[0.88] object-contain transition-transform duration-700 ease-out md:group-hover:scale-[0.96]"
+                            />
+                            <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-black/5 transition-all duration-500 md:group-hover:ring-white/10" />
                           </div>
-
-                          {/* Upgraded Buttons Section */}
-                          <div className="ml-[52px] mt-2 flex items-center gap-4">
-                            {project.github && (
-                              <a
-                                href={project.github}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group/btn flex items-center gap-2 rounded-full border border-black/15 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-black/70 transition-all duration-300 hover:border-black hover:bg-black hover:text-white md:group-hover:border-white/20 md:group-hover:text-white/70 md:group-hover:hover:border-white md:group-hover:hover:bg-white md:group-hover:hover:text-black"
-                              >
-                                <Icon
-                                  icon="mdi:github"
-                                  className="text-sm transition-transform duration-300 group-hover/btn:-rotate-12 group-hover/btn:scale-110"
-                                />
-                                <span>Source</span>
-                              </a>
-                            )}
-                            {project.live && (
-                              <a
-                                href={project.live}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group/btn flex items-center gap-2 rounded-full border border-black/15 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-black/70 transition-all duration-300 hover:border-black hover:bg-black hover:text-white md:group-hover:border-white/20 md:group-hover:text-white/70 md:group-hover:hover:border-white md:group-hover:hover:bg-white md:group-hover:hover:text-black"
-                              >
-                                <span>Live</span>
-                                <Icon
-                                  icon="lucide:arrow-up-right"
-                                  className="text-sm transition-transform duration-300 group-hover/btn:-translate-y-[2px] group-hover/btn:translate-x-[2px]"
-                                />
-                              </a>
-                            )}
-                          </div>
-                        </div>
-
-                        <div
-                          ref={(el) => (imageRefs.current[currentIndex] = el)}
-                          className="relative aspect-video overflow-hidden rounded-2xl bg-black/[0.04]"
-                          style={{ transformStyle: "preserve-3d" }}
-                          onMouseMove={(e) => handleMouseMove(e, currentIndex)}
-                        >
-                          <img
-                            src={project.bgImage}
-                            alt=""
-                            aria-hidden="true"
-                            className="absolute inset-0 h-full w-full object-cover opacity-15 grayscale transition-all duration-700 md:group-hover:opacity-35 md:group-hover:grayscale-0"
-                          />
-                          <img
-                            src={project.image}
-                            alt={project.name}
-                            className="absolute inset-0 h-full w-full scale-[0.88] object-contain transition-transform duration-700 ease-out md:group-hover:scale-[0.96]"
-                          />
-                          <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-black/5 transition-all duration-500 md:group-hover:ring-white/10" />
                         </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
 
         {/* Separate Projects Page Link */}

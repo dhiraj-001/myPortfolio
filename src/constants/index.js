@@ -41,9 +41,28 @@ export const servicesData = [
     ],
   },
 ];
+
 export const projects = [
   {
     id: 1,
+    domain: "AI / Machine Learning",
+    name: "Explainable GNN Intrusion Detection System",
+    description:
+      "Built a One-Class GNN (3-Layer Deep SVDD) model to detect zero-day threats in SDN using spatial graph topology and GNNExplainer for XAI.",
+    github: "https://github.com/dhiraj-001/zero_day_attack_detection", 
+    live: "", 
+    image: "/assets/projects/zero_day_attack.png",
+    bgImage: "/assets/backgrounds/zero_day_attack.png",
+    frameworks: [
+      { id: 1, name: "PyTorch Geometric" },
+      { id: 2, name: "Deep SVDD" },
+      { id: 3, name: "GNNExplainer" },
+      { id: 4, name: "NetworkX" },
+      { id: 5, name: "Streamlit" },
+    ],
+  },
+  {
+    id: 2,
     domain: "AI / Machine Learning",
     name: "AI Scam Detection System",
     description:
@@ -61,7 +80,7 @@ export const projects = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     domain: "AI / Machine Learning",
     name: "AI Spend Intelligence System",
     description:
@@ -78,7 +97,7 @@ export const projects = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     domain: "AI / Machine Learning",
     name: "Smart Tourist Safety System",
     description:
@@ -94,8 +113,8 @@ export const projects = [
       { id: 4, name: "GPS Analytics" },
     ],
   },
-    {
-    id: 4,
+  {
+    id: 5,
     domain: "Full Stack Development",
     name: "UpTradeLevel MLM Platform",
     description:
@@ -113,7 +132,7 @@ export const projects = [
     ],
   },
   {
-    id: 5,
+    id: 6,
     domain: "Full Stack Development",
     name: "University Guest House Booking System",
     description:
@@ -131,7 +150,7 @@ export const projects = [
     ],
   },
   {
-    id: 6,
+    id: 7,
     domain: "Full Stack Development",
     name: "Ghost Invoice Generator",
     description:
@@ -149,7 +168,7 @@ export const projects = [
     ],
   },
   {
-    id: 7,
+    id: 8,
     domain: "Full Stack Development",
     name: "Totem Management CRM",
     description:
@@ -166,7 +185,7 @@ export const projects = [
     ],
   },
   {
-    id: 8,
+    id: 9,
     domain: "App Development",
     name: "Booking System AUS - Mobile App",
     description:
@@ -182,7 +201,7 @@ export const projects = [
     ],
   },
   {
-    id: 9,
+    id: 10,
     domain: "App Development",
     name: "Vedaz Expert Booking App",
     description:
@@ -231,11 +250,20 @@ export const workExperiences = [
   },
   {
     id: 2,
+    name: "Summer Research Intern",
+    pos: "NIT, Silchar (Dept. of CSE)",
+    duration: "Jun 2026 – Jul 2026",
+    title: "• Developed an Explainable GNN IDS to detect Zero-Day threats in SDNs.\n• Built a One-Class GNN (Deep SVDD) achieving 0.9999 ROC-AUC and 98.01% F1-Score.\n• Integrated GNNExplainer for model interpretability and built a Streamlit dashboard.",
+    icon: "/assets/placeholder.svg",
+    animation: "victory",
+  },
+  {
+    id: 3,
     name: "Full Stack Technology Developer (Intern)",
     pos: "MyNadezhda Consultancy Services",
     duration: "Jun 2026 – Present",
     title: "• Working on full-stack development projects using modern frameworks like Nuxt.js, Fastify, and FastAPI.\n• Participating in code reviews, testing, and debugging within a Linux (Ubuntu) environment.\n• Collaborating with team members to build and manage database solutions using PostgreSQL.",
     icon: "/assets/placeholder.svg",
-    animation: "victory", // You can change this if you have different animations set up
+    animation: "victory",
   }
 ];

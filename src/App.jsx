@@ -11,10 +11,17 @@ import Contact from "./sections/Contact";
 import { useProgress } from "@react-three/drei";
 import Skills from "./sections/Skills";
 import Projects from "./pages/Projects";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AdminDashboard from "./pages/AdminDashboard";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Achievements from "./sections/Achivements";
 import Experience from "./sections/Experience";
+
+// Navigation wrapper to only display the sliding hamburger menu on the homepage
+const Navigation = () => {
+  const location = useLocation();
+  return location.pathname === "/" ? <Navbar /> : null;
+};
 
 const App = () => {
   const { progress } = useProgress();
@@ -87,7 +94,7 @@ const App = () => {
           </script>
         </Helmet>
         <Router>
-        <Navbar />
+        <Navigation />
         {/* Main Content Reveal */}
         <div
           className={`transition-all duration-1000 delay-300 ${
@@ -108,6 +115,7 @@ const App = () => {
               </>
             } />
             <Route path="/projects" element={<Projects />} />
+            <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
         </div>
         </Router>
